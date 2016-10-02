@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tasks app</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+    <style type="text/css">
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .is-done {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="row">
+            <div class="page-header">
+              <h1>
+                My tasks
+                <small v-show="tasks.length">
+                    ({{ notCompletedAmount }}/{{ tasks.length }})
+                </small>
+              </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <ul
+                    class="list-group"
+                    v-show="tasks.length"
+                    >
+                    <li
+                        class="list-group-item"
+                        v-for="task in tasks"
+                    >
+                        <span :class="{ 'is-done': isCompleted(task) }">
+                            {{ task.title }}
+                        </span>
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-xs btn-primary"
+                                v-show="!task.done"
+                                @click="task.done = true"
+                            >done</button>
+                            <button type="button" class="btn btn-xs btn-default"
+                                v-show="task.done"
+                                @click="task.done = false"
+                            >undone</button>
+                            <button type="button" class="btn btn-xs btn-danger"
+                                @click="remove(task)"
+                            >remove</button>
+                        </div>
+                    </li>
+                </ul>
+
+                <div
+                    class="alert alert-info"
+                    v-else="!tasks.length"
+                >
+                    <strong>Nothing to work on.</strong>
+                    Find something :P
+                </div>
+
+                <button
+                    type="button"
+                    class="btn btn-primary btn-small"
+                    v-show="tasks.length - notCompletedAmount"
+                    @click="removeCompleted"
+                >
+                    Remove completed
+                </button>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form">
+                    <div class="form-group">
+                        <label>New task ??</label>
+                        <input
+                            type="text" class="form-control"
+                            placeholder="I need to..."
+                            v-model="newTaskTitle"
+                            @keyup.enter="addNewTask"
+                        >
+                    </div>
+
+                    <button
+                        type="button"
+                        class="btn btn-primary pull-right"
+                        @click="addNewTask"
+                    >
+                        Add task
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.js"></script>
+    <script type="text/javascript" src="js/simple-tasks-app.js"></script>
+</body>
+</html>
