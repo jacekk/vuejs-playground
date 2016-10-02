@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vue Resource</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+    <style type="text/css">
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="vue-resource" v-cloak>
+        <div class="row">
+            <div class="page-header">
+                <h1>My resources</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <h2>
+                    Recent news
+                    <a
+                        class="btn btn-default pull-right"
+                        v-show="recentNews.length"
+                        @click="refreshRecentNews"
+                    >
+                        Refresh
+                    </a>
+                </h2>
+                <ul class="list-group" v-show="recentNews.length">
+                    <li class="list-group-item" v-for="news in recentNews">
+                        <span class="badge">{{ news.created_at }}</span>
+                        <div>{{ news.title }}</div>
+                    </li>
+                </ul>
+                <div class="progress" v-show="! recentNews.length && ! recentLoadError">
+                    <div
+                        class="progress-bar progress-bar-striped active"
+                        style="width: 100%"
+                    >
+                        loading...
+                    </div>
+                </div>
+                <div class="alert alert-danger" v-show="recentLoadError">
+                    {{ recentLoadError }}
+                    <br>
+                    <b>Sorry :( </b>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <h2>Search news</h2>
+                <div class="form">
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Searching for a ..."
+                            v-model.trim="searchPhrase"
+                            @keyup.enter="submitSearch"
+                        >
+                    </div>
+                </div>
+                <div class="progress" v-show="searchWidgetState === 'loading'">
+                    <div
+                        class="progress-bar progress-bar-striped active"
+                        style="width: 100%"
+                    >
+                        loading...
+                    </div>
+                </div>
+                <ul class="list-group" v-show="foundedNews.length">
+                    <li class="list-group-item" v-for="news in foundedNews">
+                        {{ news.title }}
+                        <span class="badge">{{ news.created_at }}</span>
+                    </li>
+                </ul>
+                <div class="alert alert-info" v-show="doShowSearchInfo">
+                    Type any keyword to search anything interesting :)
+                </div>
+                <div class="alert alert-warning" v-show="doShowSearchWarning">
+                    Sorry. We couldn't find anything :(
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <pre>{{ $data | json }}</pre>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.js"></script>
+    <script type="text/javascript" src="js/vue-resource.js"></script>
+</body>
+</html>
