@@ -1,5 +1,5 @@
 new Vue({
-    el: '#app',
+    el: '#simple-tasks-app',
     data: {
         newTaskTitle: '',
         tasks: [
