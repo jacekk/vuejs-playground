@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alerts</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+    <style type="text/css">
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <template id="alert-template">
+        <div class="alert alert-{{ type }}" v-show="show">
+            <button
+                type="button"
+                class="close"
+                @click="hide"
+                v-show="!timeout"
+            >
+                &times;
+            </button>
+            <slot/>
+        </div>
+    </template>
+
+    <div class="container" id="alerts">
+        <div class="row">
+            <div class="page-header">
+                <h1>Alerts</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <alert>Just a simple alert with default style</alert>
+                <alert type="success">We are happy you are here :)</alert>
+                <alert type="danger">Sth went wrong</alert>
+                <alert :timeout=1000>Will disappear after 1 sec</alert>
+                <alert :timeout=5e3>Will disappear after 5 seconds</alert>
+                <alert type="warning" :timeout=10e3>Will disappear after 10 seconds</alert>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.js"></script>
+    <script type="text/javascript" src="js/alerts.js"></script>
+</body>
+</html>
