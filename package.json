@@ -1,0 +1,14 @@
+{
+  "name": "vue-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jacekk",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp-serve": "^1.4.0"
+  }
+}
