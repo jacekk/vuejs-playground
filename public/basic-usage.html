@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basics</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+    <style type="text/css">
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="basic-usage">
+        <div class="page-header">
+            <h1>Basics</h1>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">
+                <input
+                    type="text" class="form-control"
+                    placeholder="type anything..."
+                    v-model="msg"
+                />
+                <br>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <b>Lower case:</b>
+                        {{ (msg || '-') | lowercase }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>Upper case:</b>
+                        <span v-show="msg">
+                            {{ msg | uppercase }}
+                        </span>
+                        <span v-else>
+                            -
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Capitalized:</b>
+                        {{ (msg || '-') | capitalize }}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-4">
+                <div class="btn-group-vertical btn-block">
+                    <a class="btn btn-primary" @click="randomString">Random string</a>
+                    <a class="btn btn-primary" v-on:click="randomLongString">Longer string</a>
+                    <a class="btn btn-primary" @click="randomNumber">Random number</a>
+                </div>
+                <a class="btn btn-block btn-warning" @click="clearInput">Clear input</a>
+                <a class="btn btn-block btn-danger" @click="alert">Alert</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.js"></script>
+    <script type="text/javascript" src="js/basic-usage.js"></script>
+</body>
+</html>
